@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import clsx from "clsx";
-import { ArrowDown, ArrowUpDown } from "lucide-react";
+import { ArrowRight, ArrowLeftRight } from "lucide-react";
 
-const CYCLE_MS = 1600;
+const CYCLE_MS = 950;
 
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(
@@ -50,12 +50,15 @@ export function ArchitectureDiagram({
   }, [playing, steps.length]);
 
   const active = hovered ?? autoIndex;
-  const Connector = variant === "bidirectional" ? ArrowUpDown : ArrowDown;
+  const Connector = variant === "bidirectional" ? ArrowLeftRight : ArrowRight;
 
   return (
     <div
       ref={containerRef}
-      className={clsx("flex flex-col items-stretch", className)}
+      className={clsx(
+        "flex snap-x snap-mandatory items-stretch gap-0 overflow-x-auto overscroll-x-contain pb-2",
+        className
+      )}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => {
         setPaused(false);
@@ -67,18 +70,18 @@ export function ArchitectureDiagram({
         const connectorLive = playing && active === i;
 
         return (
-          <div key={step} className="flex flex-col items-center">
+          <div key={step} className="flex shrink-0 snap-start items-center">
             <motion.button
               type="button"
               onMouseEnter={() => setHovered(i)}
               onFocus={() => setHovered(i)}
               onBlur={() => setHovered(null)}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-10% 0px" }}
-              transition={{ duration: 0.5, delay: i * 0.06 }}
+              initial={{ opacity: 0, x: 12 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "0px -10%" }}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
               className={clsx(
-                "relative w-full overflow-hidden rounded-xl border px-5 py-4 text-left transition-colors duration-300",
+                "relative flex h-[76px] w-[168px] flex-col justify-center overflow-hidden rounded-xl border px-4 py-3 text-left transition-colors duration-300 sm:w-[184px]",
                 isActive
                   ? "border-accent bg-accent-soft"
                   : "border-border bg-surface hover:border-border-strong"
@@ -87,11 +90,11 @@ export function ArchitectureDiagram({
               {isActive && (
                 <motion.span
                   layoutId="diagram-active-sheen"
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-accent/10 to-transparent"
-                  transition={{ duration: 0.4 }}
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-accent/10 to-transparent"
+                  transition={{ duration: 0.3 }}
                 />
               )}
-              <div className="relative flex items-center gap-3">
+              <div className="relative flex flex-col gap-1">
                 <span
                   className={clsx(
                     "font-mono text-xs transition-colors",
@@ -102,7 +105,7 @@ export function ArchitectureDiagram({
                 </span>
                 <span
                   className={clsx(
-                    "text-sm font-medium transition-colors sm:text-base",
+                    "text-sm font-medium leading-snug transition-colors",
                     isActive ? "text-foreground" : "text-foreground/90"
                   )}
                 >
@@ -116,9 +119,9 @@ export function ArchitectureDiagram({
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.06 + 0.1 }}
+                transition={{ duration: 0.4, delay: i * 0.05 + 0.08 }}
                 className={clsx(
-                  "relative my-1 flex h-6 w-5 items-center justify-center transition-colors",
+                  "relative my-1 flex h-6 w-6 shrink-0 items-center justify-center transition-colors",
                   active === i || active === i + 1 ? "text-accent" : "text-muted-2"
                 )}
               >
@@ -126,9 +129,9 @@ export function ArchitectureDiagram({
                 {connectorLive && variant !== "bidirectional" && (
                   <motion.span
                     key={`pulse-${i}-${autoIndex}`}
-                    className="absolute left-1/2 top-0 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-accent shadow-[0_0_8px_2px_rgba(110,123,242,0.6)]"
-                    initial={{ y: 0, opacity: 0 }}
-                    animate={{ y: 24, opacity: [0, 1, 1, 0] }}
+                    className="absolute left-0 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-accent shadow-[0_0_8px_2px_rgba(110,123,242,0.6)]"
+                    initial={{ x: 0, opacity: 0 }}
+                    animate={{ x: 24, opacity: [0, 1, 1, 0] }}
                     transition={{ duration: CYCLE_MS / 1000, ease: "easeInOut" }}
                   />
                 )}

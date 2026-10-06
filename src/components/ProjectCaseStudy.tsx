@@ -96,10 +96,11 @@ export function ProjectCaseStudy({
                     </p>
                   </Reveal>
                 )}
-                <div className="mt-8 max-w-md">
+                <div className="relative mt-8 -mx-6 sm:-mx-8 lg:mx-0">
                   <ArchitectureDiagram
                     steps={cs.diagram}
                     variant={cs.diagramVariant}
+                    className="px-6 sm:px-8 lg:px-0"
                   />
                 </div>
               </section>
