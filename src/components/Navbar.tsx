@@ -1,17 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import clsx from "clsx";
 import { Container } from "@/components/Container";
 import { site } from "@/lib/site";
 
 const links = [
-  { href: "#work", label: "Work" },
-  { href: "#experience", label: "Experience" },
-  { href: "#skills", label: "Skills" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#work", label: "Work" },
+  { href: "/#experience", label: "Experience" },
+  { href: "/#skills", label: "Skills" },
+  { href: "/#about", label: "About" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export function Navbar() {
@@ -33,22 +34,22 @@ export function Navbar() {
       )}
     >
       <Container className="flex h-16 items-center justify-between">
-        <a
-          href="#"
+        <Link
+          href="/"
           className="font-mono text-sm font-medium tracking-tight text-foreground"
         >
           {site.name}
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
           {links.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="text-sm text-muted transition-colors hover:text-foreground"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -81,14 +82,14 @@ export function Navbar() {
         <div className="glass border-t border-border md:hidden">
           <Container className="flex flex-col gap-1 py-4">
             {links.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
                 className="rounded-lg px-2 py-2.5 text-sm text-muted hover:bg-surface hover:text-foreground"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <a
               href={site.resumeUrl}
