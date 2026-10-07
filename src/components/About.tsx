@@ -42,9 +42,11 @@ export function About() {
             </Reveal>
             <Reveal delay={0.24}>
               <p>
-                I&apos;m comfortable working across the stack with React when a
-                feature needs it, but my center of gravity is the backend:
-                APIs, services, data, and the systems that connect them.
+                I own features end to end — from the Django services and data
+                model to the JavaScript/React interfaces people actually use,
+                like the agreement management module and internal loan
+                dashboards. My center of gravity is still the backend: APIs,
+                services, data, and the systems that connect them.
               </p>
             </Reveal>
           </div>
