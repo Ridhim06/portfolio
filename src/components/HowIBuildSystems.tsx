@@ -56,8 +56,13 @@ export function HowIBuildSystems() {
             </div>
           </div>
 
-          <div className="lg:pt-2">
-            <ArchitectureDiagram steps={pattern} />
+          <div className="lg:sticky lg:top-24 lg:self-start">
+            <div className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
+              <p className="mb-4 font-mono text-xs uppercase tracking-[0.15em] text-muted-2">
+                Request lifecycle
+              </p>
+              <ArchitectureDiagram steps={pattern} orientation="vertical" />
+            </div>
           </div>
         </div>
       </Container>

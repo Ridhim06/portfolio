@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import clsx from "clsx";
 import { Container } from "@/components/Container";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { site } from "@/lib/site";
 
 const links = [
@@ -53,7 +54,8 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden items-center gap-3 md:flex">
+          <ThemeToggle />
           <a
             href={site.resumeUrl}
             target="_blank"
@@ -68,14 +70,17 @@ export function Navbar() {
           </a>
         </div>
 
-        <button
-          type="button"
-          aria-label="Toggle menu"
-          className="text-foreground md:hidden"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="flex items-center gap-1 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            aria-label="Toggle menu"
+            className="flex h-9 w-9 items-center justify-center text-foreground"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </Container>
 
       {open && (

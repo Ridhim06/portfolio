@@ -14,7 +14,7 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)",
+            "linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)",
           backgroundSize: "56px 56px",
           maskImage:
             "radial-gradient(ellipse 70% 60% at 50% 20%, black 20%, transparent 75%)",

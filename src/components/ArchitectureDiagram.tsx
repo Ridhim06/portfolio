@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import clsx from "clsx";
-import { ArrowRight, ArrowLeftRight } from "lucide-react";
+import { ArrowRight, ArrowLeftRight, ArrowDown } from "lucide-react";
 
 const CYCLE_MS = 950;
 
@@ -25,10 +25,12 @@ function usePrefersReducedMotion() {
 export function ArchitectureDiagram({
   steps,
   variant = "flow",
+  orientation = "horizontal",
   className,
 }: {
   steps: string[];
   variant?: "flow" | "bidirectional" | "migration";
+  orientation?: "horizontal" | "vertical";
   className?: string;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -50,13 +52,17 @@ export function ArchitectureDiagram({
   }, [playing, steps.length]);
 
   const active = hovered ?? autoIndex;
-  const Connector = variant === "bidirectional" ? ArrowLeftRight : ArrowRight;
+  const vertical = orientation === "vertical";
+  const Connector =
+    variant === "bidirectional" ? ArrowLeftRight : vertical ? ArrowDown : ArrowRight;
 
   return (
     <div
       ref={containerRef}
       className={clsx(
-        "flex snap-x snap-mandatory items-stretch gap-0 overflow-x-auto overscroll-x-contain pb-2",
+        vertical
+          ? "flex flex-col items-stretch gap-0"
+          : "flex snap-x snap-mandatory items-stretch gap-0 overflow-x-auto overscroll-x-contain pb-2",
         className
       )}
       onMouseEnter={() => setPaused(true)}
@@ -70,18 +76,28 @@ export function ArchitectureDiagram({
         const connectorLive = playing && active === i;
 
         return (
-          <div key={step} className="flex shrink-0 snap-start items-center">
+          <div
+            key={step}
+            className={clsx(
+              vertical
+                ? "flex flex-col items-stretch"
+                : "flex shrink-0 snap-start items-center"
+            )}
+          >
             <motion.button
               type="button"
               onMouseEnter={() => setHovered(i)}
               onFocus={() => setHovered(i)}
               onBlur={() => setHovered(null)}
-              initial={{ opacity: 0, x: 12 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={vertical ? { opacity: 0, y: 12 } : { opacity: 0, x: 12 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, margin: "0px -10%" }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
               className={clsx(
-                "relative flex h-[76px] w-[168px] flex-col justify-center overflow-hidden rounded-xl border px-4 py-3 text-left transition-colors duration-300 sm:w-[184px]",
+                "relative flex flex-col justify-center overflow-hidden rounded-xl border px-4 py-3 text-left transition-colors duration-300",
+                vertical
+                  ? "min-h-[60px] w-full"
+                  : "h-[76px] w-[168px] sm:w-[184px]",
                 isActive
                   ? "border-accent bg-accent-soft"
                   : "border-border bg-surface hover:border-border-strong"
@@ -121,7 +137,8 @@ export function ArchitectureDiagram({
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.05 + 0.08 }}
                 className={clsx(
-                  "relative my-1 flex h-6 w-6 shrink-0 items-center justify-center transition-colors",
+                  "relative flex h-6 w-6 shrink-0 items-center justify-center transition-colors",
+                  vertical ? "mx-auto my-0.5" : "my-1",
                   active === i || active === i + 1 ? "text-accent" : "text-muted-2"
                 )}
               >
@@ -129,9 +146,18 @@ export function ArchitectureDiagram({
                 {connectorLive && variant !== "bidirectional" && (
                   <motion.span
                     key={`pulse-${i}-${autoIndex}`}
-                    className="absolute left-0 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-accent shadow-[0_0_8px_2px_rgba(110,123,242,0.6)]"
-                    initial={{ x: 0, opacity: 0 }}
-                    animate={{ x: 24, opacity: [0, 1, 1, 0] }}
+                    className={clsx(
+                      "absolute h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_8px_2px_rgba(110,123,242,0.6)]",
+                      vertical
+                        ? "left-1/2 top-0 -translate-x-1/2"
+                        : "left-0 top-1/2 -translate-y-1/2"
+                    )}
+                    initial={{ x: 0, y: 0, opacity: 0 }}
+                    animate={
+                      vertical
+                        ? { y: 24, opacity: [0, 1, 1, 0] }
+                        : { x: 24, opacity: [0, 1, 1, 0] }
+                    }
                     transition={{ duration: CYCLE_MS / 1000, ease: "easeInOut" }}
                   />
                 )}

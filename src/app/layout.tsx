@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { CursorField } from "@/components/CursorField";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -50,14 +51,25 @@ export const metadata: Metadata = {
   },
 };
 
+// Runs before first paint so the saved/system theme applies with no flash
+const themeInitScript = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="dark"}})()`;
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="antialiased">
+        <CursorField />
         <Navbar />
         <main>{children}</main>
         <Footer />
