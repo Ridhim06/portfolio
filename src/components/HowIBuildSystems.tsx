@@ -25,7 +25,7 @@ const layers = [
 
 export function HowIBuildSystems() {
   return (
-    <section className="border-y border-border bg-surface/30 py-24 sm:py-32">
+    <section className="border-y border-border bg-surface/30 py-16 sm:py-20">
       <Container>
         <div className="grid gap-14 lg:grid-cols-[1fr_1fr]">
           <div>

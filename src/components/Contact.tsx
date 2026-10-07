@@ -12,9 +12,9 @@ const links = [
 
 export function Contact() {
   return (
-    <section id="contact" className="py-24 sm:py-32">
+    <section id="contact" className="py-16 sm:py-20">
       <Container>
-        <div className="rounded-3xl border border-border-strong bg-gradient-to-br from-surface to-accent-soft px-6 py-16 text-center sm:px-16 sm:py-24">
+        <div className="rounded-3xl border border-border-strong bg-gradient-to-br from-surface to-accent-soft px-6 py-12 text-center sm:px-16 sm:py-16">
           <Reveal>
             <h2 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
               Have a system worth building? Let&apos;s talk.

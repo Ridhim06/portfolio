@@ -93,7 +93,7 @@ function SkillIcon({ name }: { name: string }) {
 
 export function Skills() {
   return (
-    <section id="skills" className="py-24 sm:py-32">
+    <section id="skills" className="py-16 sm:py-20">
       <Container>
         <SectionHeading
           eyebrow="Tech stack"

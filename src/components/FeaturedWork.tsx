@@ -5,7 +5,7 @@ import { projectsSorted } from "@/lib/projects";
 
 export function FeaturedWork() {
   return (
-    <section id="work" className="py-24 sm:py-32">
+    <section id="work" className="py-16 sm:py-20">
       <Container>
         <SectionHeading
           eyebrow="Featured work"

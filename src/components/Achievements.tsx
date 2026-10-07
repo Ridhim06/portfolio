@@ -8,7 +8,7 @@ const icons = [Award, Trophy];
 
 export function Achievements() {
   return (
-    <section className="py-24 sm:py-32">
+    <section className="py-12 sm:py-16">
       <Container>
         <div className="grid gap-14 lg:grid-cols-2">
           <div>

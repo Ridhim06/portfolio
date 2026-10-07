@@ -164,36 +164,3 @@ export const achievements = [
       "Built a route optimization solution that boosted Sales & Collections team efficiency.",
   },
 ];
-
-export const philosophy = [
-  {
-    title: "Own the workflow, not just the endpoint",
-    description: "I care about what happens before and after an API call.",
-  },
-  {
-    title: "Automate repetitive work",
-    description: "If a process is manual and repeatable, it is a candidate for automation.",
-  },
-  {
-    title: "Design for failure",
-    description: "Retries, failure states, validation, and recovery matter in production systems.",
-  },
-  {
-    title: "Integrate systems carefully",
-    description: "Third-party integrations need clear contracts, error handling, and observability.",
-  },
-  {
-    title: "Use AI where it solves a real problem",
-    description: "GenAI should be integrated into useful production workflows rather than added as a gimmick.",
-  },
-];
-
-export const interests = [
-  "Backend engineering",
-  "System design",
-  "Fintech infrastructure",
-  "Workflow automation",
-  "GenAI / LLM applications",
-  "API design",
-  "Data-intensive systems",
-];

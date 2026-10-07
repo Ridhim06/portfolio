@@ -4,7 +4,7 @@ import { Reveal } from "@/components/Reveal";
 
 export function About() {
   return (
-    <section id="about" className="py-24 sm:py-32">
+    <section id="about" className="py-16 sm:py-20">
       <Container>
         <div className="grid gap-12 md:grid-cols-[0.9fr_1.1fr]">
           <SectionHeading

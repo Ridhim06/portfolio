@@ -51,8 +51,8 @@ export const metadata: Metadata = {
   },
 };
 
-// Runs before first paint so the saved/system theme applies with no flash
-const themeInitScript = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="dark"}})()`;
+// Runs before first paint so the saved theme (dark by default) applies with no flash
+const themeInitScript = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t="dark"}document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="dark"}})()`;
 
 export default function RootLayout({
   children,

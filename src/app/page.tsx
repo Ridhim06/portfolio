@@ -6,8 +6,6 @@ import { HowIBuildSystems } from "@/components/HowIBuildSystems";
 import { Skills } from "@/components/Skills";
 import { ExperienceTimeline } from "@/components/ExperienceTimeline";
 import { Achievements } from "@/components/Achievements";
-import { Philosophy } from "@/components/Philosophy";
-import { Interests } from "@/components/Interests";
 import { Contact } from "@/components/Contact";
 
 export default function Home() {
@@ -15,14 +13,12 @@ export default function Home() {
     <>
       <Hero />
       <Metrics />
-      <About />
       <FeaturedWork />
       <HowIBuildSystems />
-      <Skills />
       <ExperienceTimeline />
+      <Skills />
       <Achievements />
-      <Philosophy />
-      <Interests />
+      <About />
       <Contact />
     </>
   );

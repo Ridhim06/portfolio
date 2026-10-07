@@ -14,11 +14,11 @@ const evolution = [
 
 export function ExperienceTimeline() {
   return (
-    <section id="experience" className="py-24 sm:py-32">
+    <section id="experience" className="py-16 sm:py-20">
       <Container>
         <SectionHeading
           eyebrow="Experience"
-          title="Three years in, the same platform keeps asking harder questions."
+          title="Four years in, the same platform keeps asking harder questions."
         />
 
         <Reveal delay={0.08}>
